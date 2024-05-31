@@ -3,6 +3,7 @@
 // license found at http://www.site.uottawa.ca/school/research/lloseng/
 
 import java.io.*;
+import java.util.Scanner;
 
 /**
  * This class prompts the user for a set of coordinates, and then 
@@ -68,6 +69,51 @@ public class PointCPTest
     System.out.println("\nAfter asking to store as Cartesian:\n" + point);
     point.convertStorageToPolar();
     System.out.println("\nAfter asking to store as Polar:\n" + point);
+	
+	System.out.println("Testing PointCP2");
+	Scanner polarCoordinates = new Scanner(System.in);
+	System.out.println("Enter Rho, then Theta: ");
+	double Rho = polarCoordinates.nextDouble();
+	double Theta = polarCoordinates.nextDouble();
+	PointCP2 polarPoint = new PointCP2(Rho, Theta);
+	
+	System.out.println("\nYou entered:\n" + polarPoint);
+	System.out.println("\nHere is the Coordinate in cartesian coordinates:\n" + "( " + polarPoint.getX() + "," + polarPoint.getY());
+	System.out.println("\nHere is the Coordinate in polar coordinates:\n" + "( " + polarPoint.getRho() + "," + polarPoint.getTheta());
+	
+	Scanner otherPoint = new Scanner(System.in);
+	Systemout.println("\nEnter another polar coordinate: ");
+	double otherRho = otherPoint.nextDouble();
+	double otherTheta = otherPoint.nextDouble();
+	PointCP2 otherPolarPoint = new PointCP2(otherRho, otherTheta);
+	
+	double distance = polarPoint.getDistance(otherPolarPoint);
+	
+	System.out.println("\nThe distance between your first point and your new point is: " + distance);
+	
+	System.out.println("----------------------------------");
+	
+	System.out.println("Testing PointCP3");
+	Scanner cartesianCoordinates = new Scanner(System.in);
+	System.out.println("Enter x, then y: ");
+	double x = cartesianCoordinates.nextDouble();
+	double y = cartesianCoordinates.nextDouble();
+	PointCP3 cartesianPoint = new PointCP3(x, y);
+	
+	System.out.println("\nYou entered:\n" + cartesianPoint);
+	System.out.println("\nHere is the Coordinate in cartesian coordinates:\n" + "( " + cartesianPoint.getX() + "," + cartesianPoint.getY());
+	System.out.println("\nHere is the Coordinate in polar coordinates:\n" + "( " + cartesianPoint.getRho() + "," + cartesianPoint.getTheta());
+	
+	Scanner otherPoint2 = new Scanner(System.in);
+	Systemout.println("\nEnter another cartesian coordinate: ");
+	double otherX = otherPoint2.nextDouble();
+	double otherY = otherPoint2.nextDouble();
+	PointCP2 otherCartesianPoint = new PointCP2(otherX, otherY);
+	
+	double distance2 = cartesianPoint.getDistance(otherCartesianPoint);
+	
+	System.out.println("\nThe distance between your first point and your new point is: " + distance2);
+	
   }
 
   /**
