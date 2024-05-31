@@ -1,24 +1,18 @@
 public class PointCP3
 {
   //Instance variables ************************************************
-
-  /**
-   * Contains C(artesian) or P(olar) to identify the type of
-   * coordinates that are being dealt with.
-   */
-  private char typeCoord;
   
   /**
    * Contains the current value of X or RHO depending on the type
    * of coordinates.
    */
-  private double xOrRho;
+  private double x;
   
   /**
    * Contains the current value of Y or THETA value depending on the
    * type of coordinates.
    */
-  private double yOrTheta;
+  private double y;
 	
   
   //Constructors ******************************************************
@@ -26,82 +20,46 @@ public class PointCP3
   /**
    * Constructs a coordinate object, with a type identifier.
    */
-  public PointCP3(char type, double xOrRho, double yOrTheta)
-  {
-    if(type != 'C' && type != 'P')
-      throw new IllegalArgumentException();
-    this.xOrRho = xOrRho;
-    this.yOrTheta = yOrTheta;
-    typeCoord = type;
+  public PointCP3(double x, double y){
+    this.xOrRho = x;
+    this.yOrTheta = y;
   }
 	
   
   //Instance methods **************************************************
  
  
-  public double getX()
-  {
-    if(typeCoord == 'C') 
-      return xOrRho;
-    else 
-      return (Math.cos(Math.toRadians(yOrTheta)) * xOrRho);
+  public double getX(){
+	return x;
   }
   
-  public double getY()
-  {
-    if(typeCoord == 'C') 
-      return yOrTheta;
-    else 
-      return (Math.sin(Math.toRadians(yOrTheta)) * xOrRho);
+  public double getY(){
+	return y;
   }
   
-  public double getRho()
-  {
-    if(typeCoord == 'P') 
-      return xOrRho;
-    else 
-      return (Math.sqrt(Math.pow(xOrRho, 2) + Math.pow(yOrTheta, 2)));
+  public double getRho(){
+      return (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
   }
   
-  public double getTheta()
-  {
-    if(typeCoord == 'P')
-      return yOrTheta;
-    else 
-      return Math.toDegrees(Math.atan2(yOrTheta, xOrRho));
+  public double getTheta(){
+      return Math.toDegrees(Math.atan2(y, x));
   }
   
 	
   /**
    * Converts Cartesian coordinates to Polar coordinates.
    */
-  public void convertStorageToPolar()
-  {
-    if(typeCoord != 'P')
-    {
-      //Calculate RHO and THETA
-      double temp = getRho();
-      yOrTheta = getTheta();
-      xOrRho = temp;
-      
-      typeCoord = 'P';  //Change coord type identifier
-    }
+  public void convertStorageToPolar(){
+    PointCP3 p = new PointCP3(x,y);
+	double coordinate1 = p.getRho();
+	double coordinate2 = p.getTheta();
   }
 	
   /**
    * Converts Polar coordinates to Cartesian coordinates.
    */
-  public void convertStorageToCartesian()
-  {
-    if(typeCoord != 'C')
-    {
-      //Calculate X and Y
-      double temp = getX();
-      yOrTheta = getY();
-      xOrRho = temp;
-   
-      typeCoord = 'C';	//Change coord type identifier
-    }
+  public void convertStorageToCartesian(){
+    return;
   }
 
   /**
@@ -112,8 +70,7 @@ public class PointCP3
    * @param pointB The second point.
    * @return The distance between the two points.
    */
-  public double getDistance(PointCP3 pointB)
-  {
+  public double getDistance(PointCP3 pointB){
     // Obtain differences in X and Y, sign is not important as these values
     // will be squared later.
     double deltaX = getX() - pointB.getX();
@@ -130,8 +87,7 @@ public class PointCP3
    * @param rotation The number of degrees to rotate the point.
    * @return The rotated image of the original point.
    */
-  public PointCP3 rotatePoint(double rotation)
-  {
+  public PointCP3 rotatePoint(double rotation){
     double radRotation = Math.toRadians(rotation);
     double X = getX();
     double Y = getY();
@@ -146,10 +102,7 @@ public class PointCP3
    *
    * @return A String containing information about the coordinates.
    */
-  public String toString()
-  {
-    return "Stored as " + (typeCoord == 'C' 
-       ? "Cartesian  (" + getX() + "," + getY() + ")"
-       : "Polar [" + getRho() + "," + getTheta() + "]") + "\n";
+  public String toString(){
+    return "Stored as Cartesian  (" + getX() + "," + getY() + ")"
   }
 }
