@@ -1,4 +1,4 @@
-// This file contains material supporting section 2.9 of the textbook:
+8// This file contains material supporting section 2.9 of the textbook:
 // "Object Oriented Software Engineering" and is issued under the open-source
 // license found at http://www.site.uottawa.ca/school/research/lloseng/
 
@@ -159,6 +159,42 @@ public class PointCPTest
 	double distance4 = cartesianPoint.getDistance(otherInstanceCartesianPoint);
 	
 	System.out.println("\nThe distance between your first point and your new point is: " + distance4);
+	
+	final int numInstances = 1000000;
+    Random rand = new Random();
+
+    // Design 1 Performance
+    long startTime = System.nanoTime();
+    for (int i = 0; i < numInstances; i++) {
+        double coord1 = rand.nextDouble() * 100;
+        double coord2 = rand.nextDouble() * 360;
+        PointCP1 point = new PointCP1(coord1, coord2, rand.nextBoolean() ? 'C' : 'P');
+        point.getX();
+        point.getY();
+        point.getRho();
+        point.getTheta();
+    }
+    long endTime = System.nanoTime();
+    long durationDesign1 = (endTime - startTime) / 1000000; // convert to milliseconds
+ // Design 5 Performance (subclass for Polar)
+    startTime = System.nanoTime();
+    for (int i = 0; i < numInstances; i++) {
+        double rho = rand.nextDouble() * 100;
+        double theta = rand.nextDouble() * 360;
+        PointCP polarPoint = new PointCP2(rho, theta);
+        polarPoint.getX();
+        polarPoint.getY();
+        polarPoint.getRho();
+        polarPoint.getTheta();
+    }
+    endTime = System.nanoTime();
+    long durationDesign5Polar = (endTime - startTime) / 1000000; // convert to milliseconds
+
+    // Output results
+    System.out.println("Performance (ms):");
+    System.out.println("Design 1: " + durationDesign1);
+    System.out.println("Design 5 (Cartesian): " + durationDesign5Cartesian);
+    System.out.println("Design 5 (Polar): " + durationDesign5Polar);
   }
 
   /**
