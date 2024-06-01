@@ -1,79 +1,162 @@
-package Test;
-
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Test{
-	public static void main(String[] args) {
-		final int numInstances = 1000000;
-	    Random random = new Random();
+public class Test {
+    public static void main(String[] args) {
+        final int numInstances = 1000000;
+        Random random = new Random();
 
-	    // Design 1 Performance
+        // Variables to store the time for each method
+        long durationGetX = 0;
+        long durationGetY = 0;
+        long durationGetRho = 0;
+        long durationGetTheta = 0;
+        long durationConvertToCartesian = 0;
+        long durationConvertToPolar = 0;
 
-	    long startTime = System.nanoTime();
+        // Design 1 Performance
+        long startTime, endTime;
+        
+        for (int i = 0; i < numInstances; i++) {
+            double coord1 = random.nextDouble();
+            double coord2 = random.nextDouble();
+            
+            PointCP point = new PointCP(random.nextBoolean() ? 'C' : 'P', coord1, coord2);
 
-	    for (int i = 0; i < numInstances; i++) {
+            startTime = System.nanoTime();
+            point.getX();
+            endTime = System.nanoTime();
+            durationGetX += (endTime - startTime);
 
-	        double coord1 = random.nextDouble();
-	        double coord2 = random.nextDouble();
+            startTime = System.nanoTime();
+            point.getY();
+            endTime = System.nanoTime();
+            durationGetY += (endTime - startTime);
 
-	        PointCP point1 = new PointCP(random.nextBoolean() ? 'C' : 'P',coord1, coord2);
-	        point1.getX();
-	        point1.getY();
-	        point1.getRho();
-	        point1.getTheta();
-			point1.convertStorageToCartesian();
-			point1.convertStorageToPolar();
-	    }
-		
-	    long endTime = System.nanoTime();
-	    long durationDesign1 = (endTime - startTime) / 10000; // computing average milliseconds
+            startTime = System.nanoTime();
+            point.getRho();
+            endTime = System.nanoTime();
+            durationGetRho += (endTime - startTime);
 
-		// Design 5 Performance (subclass for Polar)
+            startTime = System.nanoTime();
+            point.getTheta();
+            endTime = System.nanoTime();
+            durationGetTheta += (endTime - startTime);
 
-	    startTime = System.nanoTime();
+            startTime = System.nanoTime();
+            point.convertStorageToCartesian();
+            endTime = System.nanoTime();
+            durationConvertToCartesian += (endTime - startTime);
 
-	    for (int i = 0; i < numInstances; i++) {
-	        double rho = random.nextDouble();
-	        double theta = random.nextDouble();
+            startTime = System.nanoTime();
+            point.convertStorageToPolar();
+            endTime = System.nanoTime();
+            durationConvertToPolar += (endTime - startTime);
+        }
 
-	        PointCP5 polarPoint1 = new PointCP2(rho, theta);
-	        polarPoint1.getX();
-	        polarPoint1.getY();
-	        polarPoint1.getRho();
-	        polarPoint1.getTheta();
-			polarPoint1.convertStorageToCartesian();
-			polarPoint1.convertStorageToPolar();
-	    }
+        System.out.println("Design 1 Performance (average time per method call in ns):");
+        System.out.println("getX: " + durationGetX / numInstances);
+        System.out.println("getY: " + durationGetY / numInstances);
+        System.out.println("getRho: " + durationGetRho / numInstances);
+        System.out.println("getTheta: " + durationGetTheta / numInstances);
+        System.out.println("convertToCartesian: " + durationConvertToCartesian / numInstances);
+        System.out.println("convertToPolar: " + durationConvertToPolar / numInstances);
 
-	    endTime = System.nanoTime();
-	    long durationDesign5Polar = (endTime - startTime) / 10000; // computing average milliseconds
+        // Design 5 Performance (subclass for Polar)
+        durationGetX = durationGetY = durationGetRho = durationGetTheta = durationConvertToCartesian = durationConvertToPolar = 0;
 
-		// Design 5 Performance (subclass for Cartesian)
+        for (int i = 0; i < numInstances; i++) {
+            double rho = random.nextDouble();
+            double theta = random.nextDouble();
 
-	    startTime = System.nanoTime();
+            PointCP5 polarpoint = new PointCP2(rho, theta);
 
-	    for (int i = 0; i < numInstances; i++) {
-	        double x1 = random.nextDouble();
-	        double y1 = random.nextDouble();
+            startTime = System.nanoTime();
+            polarpoint.getX();
+            endTime = System.nanoTime();
+            durationGetX += (endTime - startTime);
 
-	        PointCP5 cartesianPoint1 = new PointCP3(x1, y1);
-	        cartesianPoint1.getX();
-	        cartesianPoint1.getY();
-	        cartesianPoint1.getRho();
-	        cartesianPoint1.getTheta();
-			cartesianPoint1.convertStorageToCartesian();
-			cartesianPoint1.convertStorageToPolar();
-	    }
+            startTime = System.nanoTime();
+            polarpoint.getY();
+            endTime = System.nanoTime();
+            durationGetY += (endTime - startTime);
 
-	    endTime = System.nanoTime();
-		long durationDesign5Cartesian = (endTime - startTime) / 10000; // computing average milliseconds
+            startTime = System.nanoTime();
+            polarpoint.getRho();
+            endTime = System.nanoTime();
+            durationGetRho += (endTime - startTime);
 
-	    // Output results
-	    System.out.println("Performance (ms):");
-	    System.out.println("Design 1: " + durationDesign1);
-	    System.out.println("Design 5 (Cartesian): " + durationDesign5Cartesian);
-	    System.out.println("Design 5 (Polar): " + durationDesign5Polar);
-	}
+            startTime = System.nanoTime();
+            polarpoint.getTheta();
+            endTime = System.nanoTime();
+            durationGetTheta += (endTime - startTime);
+
+            startTime = System.nanoTime();
+            polarpoint.convertStorageToCartesian();
+            endTime = System.nanoTime();
+            durationConvertToCartesian += (endTime - startTime);
+
+            startTime = System.nanoTime();
+            polarpoint.convertStorageToPolar();
+            endTime = System.nanoTime();
+            durationConvertToPolar += (endTime - startTime);
+        }
+
+        System.out.println("\nDesign 5 Performance (Polar subclass, average time per method call in ns):");
+        System.out.println("getX: " + durationGetX / numInstances);
+        System.out.println("getY: " + durationGetY / numInstances);
+        System.out.println("getRho: " + durationGetRho / numInstances);
+        System.out.println("getTheta: " + durationGetTheta / numInstances);
+        System.out.println("convertToCartesian: " + durationConvertToCartesian / numInstances);
+        System.out.println("convertToPolar: " + durationConvertToPolar / numInstances);
+
+        // Design 5 Performance (subclass for Cartesian)
+        durationGetX = durationGetY = durationGetRho = durationGetTheta = durationConvertToCartesian = durationConvertToPolar = 0;
+
+        for (int i = 0; i < numInstances; i++) {
+            double x1 = random.nextDouble();
+            double y1 = random.nextDouble();
+
+            PointCP5 cartesianpoint = new PointCP3(x1, y1);
+
+            startTime = System.nanoTime();
+            cartesianpoint.getX();
+            endTime = System.nanoTime();
+            durationGetX += (endTime - startTime);
+
+            startTime = System.nanoTime();
+            cartesianpoint.getY();
+            endTime = System.nanoTime();
+            durationGetY += (endTime - startTime);
+
+            startTime = System.nanoTime();
+            cartesianpoint.getRho();
+            endTime = System.nanoTime();
+            durationGetRho += (endTime - startTime);
+
+            startTime = System.nanoTime();
+            cartesianpoint.getTheta();
+            endTime = System.nanoTime();
+            durationGetTheta += (endTime - startTime);
+
+            startTime = System.nanoTime();
+            cartesianpoint.convertStorageToCartesian();
+            endTime = System.nanoTime();
+            durationConvertToCartesian += (endTime - startTime);
+
+            startTime = System.nanoTime();
+            cartesianpoint.convertStorageToPolar();
+            endTime = System.nanoTime();
+            durationConvertToPolar += (endTime - startTime);
+        }
+
+        System.out.println("\nDesign 5 Performance (Cartesian subclass, average time per method call in ns):");
+        System.out.println("getX: " + durationGetX / numInstances);
+        System.out.println("getY: " + durationGetY / numInstances);
+        System.out.println("getRho: " + durationGetRho / numInstances);
+        System.out.println("getTheta: " + durationGetTheta / numInstances);
+        System.out.println("convertToCartesian: " + durationConvertToCartesian / numInstances);
+        System.out.println("convertToPolar: " + durationConvertToPolar / numInstances);
+    }
 }
