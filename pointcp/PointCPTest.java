@@ -3,21 +3,33 @@
 // license found at http://www.site.uottawa.ca/school/research/lloseng/
 
 import java.io.*;
+
+import java.util.Random;
+
 import java.util.Scanner;
 
-/**
- * This class prompts the user for a set of coordinates, and then 
- * converts them from polar to cartesian or vice-versa.
- *
- * @author Fran&ccedil;ois B&eacute;langer
- * @author Dr Timothy C. Lethbridge
- * @author Paul Holden
- * @version July 2000
- */
-public class PointCPTest
-{
-  //Class methods *****************************************************
 
+
+/**
+
+ * This class prompts the user for a set of coordinates, and then 
+
+ * converts them from polar to cartesian or vice-versa.
+
+ *
+
+ * @author Fran&ccedil;ois B&eacute;langer
+
+ * @author Dr Timothy C. Lethbridge
+
+ * @author Paul Holden
+
+ * @version July 2000
+
+ */
+
+public class PointCPTest{
+  //Class methods *****************************************************
   /**
    * This method is responsible for the creation of the PointCP
    * object.  This can be done in two ways; the first, by using the
@@ -32,25 +44,29 @@ public class PointCPTest
    * @param args[1] The value of X or RHO.
    * @param args[2] The value of Y or THETA.
    */
+
   public static void main(String[] args)
   {
     PointCP point;
-
+	
     System.out.println("Cartesian-Polar Coordinates Conversion Program");
 
     // Check if the user input coordinates from the command line
     // If he did, create the PointCP object from these arguments.
     // If he did not, prompt the user for them.
+
     try
     {
       point = new PointCP(args[0].toUpperCase().charAt(0), 
         Double.valueOf(args[1]).doubleValue(), 
         Double.valueOf(args[2]).doubleValue());
     }
+
     catch(Exception e)
     {
       // If we arrive here, it is because either there were no
       // command line arguments, or they were invalid
+
       if(args.length != 0)
         System.out.println("Invalid arguments on command line");
 
@@ -64,150 +80,158 @@ public class PointCPTest
         return;
       }
     }
+
     System.out.println("\nYou entered:\n" + point);
     point.convertStorageToCartesian();
     System.out.println("\nAfter asking to store as Cartesian:\n" + point);
     point.convertStorageToPolar();
     System.out.println("\nAfter asking to store as Polar:\n" + point);
 	
+	System.out.println("----------------------------------");
 	System.out.println("Testing PointCP2");
+	
 	Scanner polarCoordinates = new Scanner(System.in);
 	System.out.println("Enter Rho, then Theta: ");
 	double Rho = polarCoordinates.nextDouble();
 	double Theta = polarCoordinates.nextDouble();
+
 	PointCP2 polarPoint = new PointCP2(Rho, Theta);
-	
 	System.out.println("\nYou entered:\n" + polarPoint);
 	System.out.println("\nHere is the Coordinate in cartesian coordinates:\n" + "( " + polarPoint.getX() + "," + polarPoint.getY());
 	System.out.println("\nHere is the Coordinate in polar coordinates:\n" + "( " + polarPoint.getRho() + "," + polarPoint.getTheta());
-	
+
 	Scanner otherPoint = new Scanner(System.in);
-	Systemout.println("\nEnter another polar coordinate: ");
+	System.out.println("\nEnter another polar coordinate: ");
 	double otherRho = otherPoint.nextDouble();
 	double otherTheta = otherPoint.nextDouble();
 	PointCP2 otherPolarPoint = new PointCP2(otherRho, otherTheta);
-	
 	double distance = polarPoint.getDistance(otherPolarPoint);
-	
-	System.out.println("\nThe distance between your first point and your new point is: " + distance);
-	
+	System.out.println("\nThe distance between your first point and your new point is: " + distance);	
+
 	System.out.println("----------------------------------");
-	
 	System.out.println("Testing PointCP3");
+
 	Scanner cartesianCoordinates = new Scanner(System.in);
 	System.out.println("Enter x, then y: ");
 	double x = cartesianCoordinates.nextDouble();
 	double y = cartesianCoordinates.nextDouble();
+
 	PointCP3 cartesianPoint = new PointCP3(x, y);
-	
 	System.out.println("\nYou entered:\n" + cartesianPoint);
 	System.out.println("\nHere is the Coordinate in cartesian coordinates:\n" + "( " + cartesianPoint.getX() + "," + cartesianPoint.getY());
 	System.out.println("\nHere is the Coordinate in polar coordinates:\n" + "( " + cartesianPoint.getRho() + "," + cartesianPoint.getTheta());
-	
+
 	Scanner otherPoint2 = new Scanner(System.in);
-	Systemout.println("\nEnter another cartesian coordinate: ");
+	System.out.println("\nEnter another cartesian coordinate: ");
 	double otherX = otherPoint2.nextDouble();
 	double otherY = otherPoint2.nextDouble();
 	PointCP2 otherCartesianPoint = new PointCP2(otherX, otherY);
-	
 	double distance2 = cartesianPoint.getDistance(otherCartesianPoint);
-	
 	System.out.println("\nThe distance between your first point and your new point is: " + distance2);
-	
+
 	System.out.println("----------------------------------");
-	
 	System.out.println("Testing Polar Coordinate PointCP5");
+
 	Scanner polarInstanceCoordinates = new Scanner(System.in);
 	System.out.println("Enter Rho, then Theta: ");
 	double instanceRho = polarInstanceCoordinates.nextDouble();
 	double instanceTheta = polarInstanceCoordinates.nextDouble();
+
 	PointCP5 polarInstancePoint = new PointCP2(instanceRho, instanceTheta);
-	
 	System.out.println("\nYou entered:\n" + polarInstancePoint);
 	System.out.println("\nHere is the Coordinate in cartesian coordinates:\n" + "( " + polarInstancePoint.getX() + "," + polarInstancePoint.getY());
-	System.out.println("\nHere is the Coordinate in polar coordinates:\n" + "( " + polarInstancePoint.getRho() + "," + polarInstancePoint.getTheta());
-	
+	System.out.println("\nHere is the Coordinate in polar coordinates:\n" + "( " + polarInstancePoint.getRho() + "," + polarInstancePoint.getTheta());	
+
 	Scanner otherPoint3 = new Scanner(System.in);
-	Systemout.println("\nEnter another polar coordinate: ");
+	System.out.println("\nEnter another polar coordinate: ");
 	double otherInstanceRho = otherPoint3.nextDouble();
 	double otherInstanceTheta = otherPoint3.nextDouble();
 	PointCP5 otherInstancePolarPoint = new PointCP2(otherInstanceRho, otherInstanceTheta);
-	
 	double distance3 = cartesianPoint.getDistance(otherInstancePolarPoint);
-	
-	System.out.println("\nThe distance between your first point and your new point is: " + distance3);
-	
+	System.out.println("\nThe distance between your first point and your new point is: " + distance3);	
+
 	System.out.println("----------------------------------");
-	
 	System.out.println("Testing Cartesian Coordinate PointCP5");
 	Scanner cartesianInstanceCoordinates = new Scanner(System.in);
+
 	System.out.println("Enter x, then y: ");
 	double instanceX = cartesianInstanceCoordinates.nextDouble();
 	double instanceY = cartesianInstanceCoordinates.nextDouble();
+
 	PointCP5 cartesianInstancePoint = new PointCP3(instanceX, instanceY);
-	
 	System.out.println("\nYou entered:\n" + cartesianInstancePoint);
 	System.out.println("\nHere is the Coordinate in cartesian coordinates:\n" + "( " + cartesianInstancePoint.getX() + "," + cartesianInstancePoint.getY());
 	System.out.println("\nHere is the Coordinate in polar coordinates:\n" + "( " + cartesianInstancePoint.getRho() + "," + cartesianInstancePoint.getTheta());
-	
+
 	Scanner otherPoint4 = new Scanner(System.in);
-	Systemout.println("\nEnter another cartesian coordinate: ");
+	System.out.println("\nEnter another cartesian coordinate: ");
 	double otherInstanceX = otherPoint3.nextDouble();
 	double otherInstanceY = otherPoint3.nextDouble();
 	PointCP5 otherInstanceCartesianPoint = new PointCP2(otherInstanceX, otherInstanceY);
-	
 	double distance4 = cartesianPoint.getDistance(otherInstanceCartesianPoint);
-	
 	System.out.println("\nThe distance between your first point and your new point is: " + distance4);
-	
+
 	final int numInstances = 10000;
     Random random = new Random();
 
     // Design 1 Performance
+
     long startTime = System.nanoTime();
+
     for (int i = 0; i < numInstances; i++) {
+
         double coord1 = random.nextDouble();
         double coord2 = random.nextDouble();
-        PointCP1 point = new PointCP1(coord1, coord2, rand.nextBoolean() ? 'C' : 'P');
-        point.getX();
-        point.getY();
-        point.getRho();
-        point.getTheta();
-		point.convertStorageToCartesian();
-		point.convertStorageToPolar();
+
+        PointCP point1 = new PointCP(random.nextBoolean() ? 'C' : 'P',coord1, coord2);
+        point1.getX();
+        point1.getY();
+        point1.getRho();
+        point1.getTheta();
+		point1.convertStorageToCartesian();
+		point1.convertStorageToPolar();
     }
+	
     long endTime = System.nanoTime();
     long durationDesign1 = (endTime - startTime) / 10000; // computing average milliseconds
-	
+
 	// Design 5 Performance (subclass for Polar)
+
     startTime = System.nanoTime();
+
     for (int i = 0; i < numInstances; i++) {
         double rho = random.nextDouble();
         double theta = random.nextDouble();
-        PointCP5 polarPoint = new PointCP2(rho, theta);
-        polarPoint.getX();
-        polarPoint.getY();
-        polarPoint.getRho();
-        polarPoint.getTheta();
-		polarPoint.convertStorageToCartesian();
-		polarPoint.convertStorageToPolar();
+
+        PointCP5 polarPoint1 = new PointCP2(rho, theta);
+        polarPoint1.getX();
+        polarPoint1.getY();
+        polarPoint1.getRho();
+        polarPoint1.getTheta();
+		polarPoint1.convertStorageToCartesian();
+		polarPoint1.convertStorageToPolar();
     }
+
     endTime = System.nanoTime();
     long durationDesign5Polar = (endTime - startTime) / 10000; // computing average milliseconds
 
 	// Design 5 Performance (subclass for Cartesian)
+
     startTime = System.nanoTime();
+
     for (int i = 0; i < numInstances; i++) {
-        double x = random.nextDouble();
-        double y = random.nextDouble();
-        PointCP5 cartesianPoint = new PointCP3(x, y);
-        cartesianPoint.getX();
-        cartesianPoint.getY();
-        cartesianPoint.getRho();
-        cartesianPoint.getTheta();
-		cartesianPoint.convertStorageToCartesian();
-		cartesianPoint.convertStorageToPolar();
+        double x1 = random.nextDouble();
+        double y1 = random.nextDouble();
+
+        PointCP5 cartesianPoint1 = new PointCP3(x1, y1);
+        cartesianPoint1.getX();
+        cartesianPoint1.getY();
+        cartesianPoint1.getRho();
+        cartesianPoint1.getTheta();
+		cartesianPoint1.convertStorageToCartesian();
+		cartesianPoint1.convertStorageToPolar();
     }
+
     endTime = System.nanoTime();
 	long durationDesign5Cartesian = (endTime - startTime) / 10000; // computing average milliseconds
 
