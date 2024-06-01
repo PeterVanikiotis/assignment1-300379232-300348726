@@ -160,35 +160,56 @@ public class PointCPTest
 	
 	System.out.println("\nThe distance between your first point and your new point is: " + distance4);
 	
-	final int numInstances = 1000000;
-    Random rand = new Random();
+	final int numInstances = 10000;
+    Random random = new Random();
 
     // Design 1 Performance
     long startTime = System.nanoTime();
     for (int i = 0; i < numInstances; i++) {
-        double coord1 = rand.nextDouble() * 100;
-        double coord2 = rand.nextDouble() * 360;
+        double coord1 = random.nextDouble();
+        double coord2 = random.nextDouble();
         PointCP1 point = new PointCP1(coord1, coord2, rand.nextBoolean() ? 'C' : 'P');
         point.getX();
         point.getY();
         point.getRho();
         point.getTheta();
+		point.convertStorageToCartesian();
+		point.convertStorageToPolar();
     }
     long endTime = System.nanoTime();
-    long durationDesign1 = (endTime - startTime) / 1000000; // convert to milliseconds
- // Design 5 Performance (subclass for Polar)
+    long durationDesign1 = (endTime - startTime) / 10000; // computing average milliseconds
+	
+	// Design 5 Performance (subclass for Polar)
     startTime = System.nanoTime();
     for (int i = 0; i < numInstances; i++) {
-        double rho = rand.nextDouble() * 100;
-        double theta = rand.nextDouble() * 360;
-        PointCP polarPoint = new PointCP2(rho, theta);
+        double rho = random.nextDouble();
+        double theta = random.nextDouble();
+        PointCP5 polarPoint = new PointCP2(rho, theta);
         polarPoint.getX();
         polarPoint.getY();
         polarPoint.getRho();
         polarPoint.getTheta();
+		polarPoint.convertStorageToCartesian();
+		polarPoint.convertStorageToPolar();
     }
     endTime = System.nanoTime();
-    long durationDesign5Polar = (endTime - startTime) / 1000000; // convert to milliseconds
+    long durationDesign5Polar = (endTime - startTime) / 10000; // computing average milliseconds
+
+	// Design 5 Performance (subclass for Cartesian)
+    startTime = System.nanoTime();
+    for (int i = 0; i < numInstances; i++) {
+        double x = random.nextDouble();
+        double y = random.nextDouble();
+        PointCP5 cartesianPoint = new PointCP3(x, y);
+        cartesianPoint.getX();
+        cartesianPoint.getY();
+        cartesianPoint.getRho();
+        cartesianPoint.getTheta();
+		cartesianPoint.convertStorageToCartesian();
+		cartesianPoint.convertStorageToPolar();
+    }
+    endTime = System.nanoTime();
+	long durationDesign5Cartesian = (endTime - startTime) / 10000; // computing average milliseconds
 
     // Output results
     System.out.println("Performance (ms):");
