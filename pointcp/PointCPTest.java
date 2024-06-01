@@ -97,8 +97,8 @@ public class PointCPTest{
 
 	PointCP2 polarPoint = new PointCP2(Rho, Theta);
 	System.out.println("\nYou entered:\n" + polarPoint);
-	System.out.println("\nHere is the Coordinate in cartesian coordinates:\n" + "( " + polarPoint.getX() + "," + polarPoint.getY());
-	System.out.println("\nHere is the Coordinate in polar coordinates:\n" + "( " + polarPoint.getRho() + "," + polarPoint.getTheta());
+	System.out.println("\nHere is the Coordinate in cartesian coordinates:\n" + "( " + polarPoint.getX() + "," + polarPoint.getY() + ")");
+	System.out.println("\nHere is the Coordinate in polar coordinates:\n" + "( " + polarPoint.getRho() + "," + polarPoint.getTheta() + ")");
 
 	Scanner otherPoint = new Scanner(System.in);
 	System.out.println("\nEnter another polar coordinate: ");
@@ -118,8 +118,8 @@ public class PointCPTest{
 
 	PointCP3 cartesianPoint = new PointCP3(x, y);
 	System.out.println("\nYou entered:\n" + cartesianPoint);
-	System.out.println("\nHere is the Coordinate in cartesian coordinates:\n" + "( " + cartesianPoint.getX() + "," + cartesianPoint.getY());
-	System.out.println("\nHere is the Coordinate in polar coordinates:\n" + "( " + cartesianPoint.getRho() + "," + cartesianPoint.getTheta());
+	System.out.println("\nHere is the Coordinate in cartesian coordinates:\n" + "( " + cartesianPoint.getX() + "," + cartesianPoint.getY() + ")");
+	System.out.println("\nHere is the Coordinate in polar coordinates:\n" + "( " + cartesianPoint.getRho() + "," + cartesianPoint.getTheta() + ")");
 
 	Scanner otherPoint2 = new Scanner(System.in);
 	System.out.println("\nEnter another cartesian coordinate: ");
@@ -139,8 +139,8 @@ public class PointCPTest{
 
 	PointCP5 polarInstancePoint = new PointCP2(instanceRho, instanceTheta);
 	System.out.println("\nYou entered:\n" + polarInstancePoint);
-	System.out.println("\nHere is the Coordinate in cartesian coordinates:\n" + "( " + polarInstancePoint.getX() + "," + polarInstancePoint.getY());
-	System.out.println("\nHere is the Coordinate in polar coordinates:\n" + "( " + polarInstancePoint.getRho() + "," + polarInstancePoint.getTheta());	
+	System.out.println("\nHere is the Coordinate in cartesian coordinates:\n" + "( " + polarInstancePoint.getX() + "," + polarInstancePoint.getY() + ")");
+	System.out.println("\nHere is the Coordinate in polar coordinates:\n" + "( " + polarInstancePoint.getRho() + "," + polarInstancePoint.getTheta() + ")");	
 
 	Scanner otherPoint3 = new Scanner(System.in);
 	System.out.println("\nEnter another polar coordinate: ");
@@ -160,8 +160,8 @@ public class PointCPTest{
 
 	PointCP5 cartesianInstancePoint = new PointCP3(instanceX, instanceY);
 	System.out.println("\nYou entered:\n" + cartesianInstancePoint);
-	System.out.println("\nHere is the Coordinate in cartesian coordinates:\n" + "( " + cartesianInstancePoint.getX() + "," + cartesianInstancePoint.getY());
-	System.out.println("\nHere is the Coordinate in polar coordinates:\n" + "( " + cartesianInstancePoint.getRho() + "," + cartesianInstancePoint.getTheta());
+	System.out.println("\nHere is the Coordinate in cartesian coordinates:\n" + "( " + cartesianInstancePoint.getX() + "," + cartesianInstancePoint.getY() + ")");
+	System.out.println("\nHere is the Coordinate in polar coordinates:\n" + "( " + cartesianInstancePoint.getRho() + "," + cartesianInstancePoint.getTheta() + ")");
 
 	Scanner otherPoint4 = new Scanner(System.in);
 	System.out.println("\nEnter another cartesian coordinate: ");

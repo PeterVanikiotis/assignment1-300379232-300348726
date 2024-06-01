@@ -46,9 +46,8 @@ public class PointCP3 extends PointCP5 {
    */
 
   public void convertStorageToPolar(){
-    PointCP3 p = new PointCP3(x,y);
-	double coordinate1 = p.getRho();
-	double coordinate2 = p.getTheta();
+	double coordinate1 = this.getRho();
+	double coordinate2 = this.getTheta();
   }
 
   /**

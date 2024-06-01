@@ -54,9 +54,8 @@ public class PointCP2 extends PointCP5{
    */
 
   public void convertStorageToCartesian(){	
-	PointCP2 p = new PointCP2(Rho, Theta);
-	double coordinate1 = p.getX();
-	double coordinate2 = p.getY();
+	double coordinate1 = this.getX();
+	double coordinate2 = this.getY();
   }	
 
   /**
