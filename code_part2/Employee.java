@@ -1,3 +1,5 @@
+package code_part_2;
+
 public class Employee {
 	String name;
 	int hours;
@@ -8,6 +10,6 @@ public class Employee {
 		this.name = name;
 		this.hours = hours;
 		this.rate = rate;
-		this.address = new Address[5];
+		this.address = addresses;
 	}
 }
